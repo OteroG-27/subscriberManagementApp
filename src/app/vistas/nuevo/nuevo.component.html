@@ -1,1 +1,48 @@
-<p>nuevo works!</p>
+<app-header></app-header>
+  <div class="container">
+    <form [formGroup]="nuevoForm" (ngSubmit)="postForm(nuevoForm.value)">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Nombre</label>
+        <input type="text" class="form-control" placeholder="Nombre del subscriptor"  formControlName="Name">
+        <div class="alert alert-danger mt-3" [hidden]="nuevoForm.get('Name')?.valid || nuevoForm.get('Name')?.pristine">
+          este campo es obligatorio
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Codigo Postal</label>
+          <input type="number" class="form-control" placeholder="Codigo Postal" formControlName="CountryCode">
+          <div class="alert alert-danger mt-3" [hidden]="nuevoForm.get('CountryCode')?.valid || nuevoForm.get('CountryCode')?.pristine">
+            este campo es obligatorio
+          </div>
+      </div>
+      <div class="form-group row">
+        <div class="col">
+          <label for="exampleFormControlInput1">Cargo</label>
+          <input type="text" class="form-control" placeholder="Cargo" formControlName="JobTitle">
+          <div class="alert alert-danger mt-3" [hidden]="nuevoForm.get('JobTitle')?.valid || nuevoForm.get('JobTitle')?.pristine">
+            este campo es obligatorio
+          </div>
+        </div>
+        <div class="col">
+          <label for="exampleFormControlInput1">Correo</label>
+          <input type="email" class="form-control" placeholder="Correo" formControlName="Email">
+          <div class="alert alert-danger mt-3" [hidden]="nuevoForm.get('Email')?.valid || nuevoForm.get('Email')?.pristine">
+            <p *ngIf="nuevoForm.get('Email')?.errors?.['required']">este campo es obligatorio</p>
+            <p *ngIf="nuevoForm.get('Email')?.errors?.['email']">Ingrese un email válido</p>
+          </div>
+          <!-- {{ Email?.errors | json }} -->
+        </div>
+        <div class="col">
+          <label for="exampleFormControlInput1">Telefono</label>
+          <input type="text" class="form-control" placeholder="Telefono" formControlName="PhoneNumber" minlength="10">
+          <div class="alert alert-danger mt-3" [hidden]="nuevoForm.get('PhoneNumber')?.valid || nuevoForm.get('PhoneNumber')?.pristine">
+            <!-- <p *ngIf="nuevoForm.get('Email')?.errors?.['required']">este campo es obligatorio</p> -->
+            <p *ngIf="nuevoForm.get('PhoneNumber')?.errors?.['minlength']">Ingrese un numero válido</p>
+          </div>
+        </div>
+      </div>
+      <br><br>
+      <button type="submit" class="btn btn-primary" [disabled]="nuevoForm.invalid">Guardar</button>
+      <button type="button" class="btn btn-dark mx-3" (click)="salir()">Salir</button>
+    </form>
+  </div>
