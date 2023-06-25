@@ -34,13 +34,13 @@ export class ApiService {
     let direccion = this.url + "pacientes";
     return this.http.put<ResponseI>(direccion, form)
   }
-  deleteSubscribers(from:SubscriptorI):Observable<ResponseI>{
+  deleteSubscribers(form:SubscriptorI):Observable<ResponseI>{
     let direccion = this.url + "pacientes";
     let Options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      body:from
+      body:form
     }
     return this.http.delete<ResponseI>(direccion, Options)
   }

@@ -28,10 +28,14 @@ export class DashboardComponent implements OnInit {
   });
   constructor(private api:ApiService, private router:Router,  private alertas:AlertasService) {}
   ngOnInit(): void {
+    let token = this.getToken();
     this.api.getAllSubscribers(1).subscribe(data=>{
       console.log(data);
       this.subcriptores = data;
     })
+  }
+  getToken(){
+    return localStorage.getItem('token');
   }
   editarSubcriptor(id:any){
     this.router.navigate(['editar', id])
@@ -40,7 +44,8 @@ export class DashboardComponent implements OnInit {
   nuevoSubcriptor(){
     this.router.navigate(['nuevo'])
   }
-  eliminar(){
+  eliminar(id:any){
+    console.log(id);
     let datos:any = this.editarForm.value;
     this.api.deleteSubscribers(datos).subscribe(data =>{
       let respuesta:ResponseI = data;
@@ -52,9 +57,10 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
-  confirmarEliminar(){
+  confirmarEliminar(id:any){
     if (window.confirm("¿Estás seguro de que deseas eliminar el suscriptor?")) {
-      this.eliminar();
+      console.log(id);
+      this.eliminar(id);
     }
   }
 }

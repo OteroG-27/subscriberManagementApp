@@ -8,5 +8,5 @@ export interface SubscriptorI{
   Genero:string;
   FechaNacimiento:string;
   Correo:string;
-  // Token:string;
+  Token:string;
 }
