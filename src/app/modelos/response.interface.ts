@@ -1,4 +1,4 @@
 export interface ResponseI{
-  Status: any;
-  Token: any;
+  status: any;
+  result: any;
 }

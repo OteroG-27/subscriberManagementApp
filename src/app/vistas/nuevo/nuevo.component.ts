@@ -13,13 +13,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class NuevoComponent implements OnInit {
   nuevoForm = new FormGroup({
-    Name: new FormControl('', Validators.required),
-    Email: new FormControl('', [Validators.required, Validators.email]),
-    CountryCode: new FormControl('', Validators.required),
-    PhoneNumber: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    JobTitle: new FormControl('', Validators.required),
-    token: new FormControl('', Validators.required)
-    // pacienteId: new FormControl('', Validators.required),
+    nombre: new FormControl('', Validators.required),
+    correo: new FormControl('', Validators.required),
+    dni:new FormControl('', Validators.required),
+    direccion:  new FormControl('', Validators.required),
+    codigoPostal:new FormControl('', Validators.required),
+    genero:new FormControl('', Validators.required),
+    telefono: new FormControl('', Validators.required),
+    token: new FormControl('', Validators.required),
+    pacienteId: new FormControl('', Validators.required),
+    fechaNacimiento:new FormControl('', Validators.required),
   })
   constructor(private api:ApiService, private router:Router, private alert:AlertasService){}
   ngOnInit(): void {

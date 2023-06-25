@@ -12,12 +12,12 @@ import { ResponseI } from 'src/app/modelos/response.interface';
 })
 export class LoginComponent implements OnInit {
    loginForm = new FormGroup({
-    UserName: new FormControl('patata', Validators.required),
-    Password: new FormControl('MrPotat0', Validators.required)
+    usuario: new FormControl('usuario1@gmail.com', Validators.required),
+    password: new FormControl('123456', Validators.required)
    })
   constructor( private api:ApiService, private router:Router){}
-  // errorStatus:boolean = false;
-  // errorMsj:any = "";
+  errorStatus:boolean = false;
+  errorMsj:any = "";
 
   ngOnInit():void {
     this.checkLocalStorage();
@@ -33,14 +33,13 @@ export class LoginComponent implements OnInit {
   this.api.loginByEmail(form).subscribe(data =>{
     console.log(data);
     let dataResponse:ResponseI = data;
-    if (dataResponse.Status == 1) {
-        localStorage.setItem("token", dataResponse.Token);
+    if (dataResponse.status == "ok") {
+        localStorage.setItem("token", dataResponse.result.token);
         this.router.navigate(['dashboard']);
+    }else{
+      this.errorStatus = true;
+      this.errorMsj = dataResponse.result.error_msg;
     }
-    // else{
-    //   this.errorStatus = true;
-    //   this.errorMsj = dataResponse.;
-    // }
   })
 
    }

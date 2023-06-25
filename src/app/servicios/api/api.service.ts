@@ -13,40 +13,40 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
   // Api de prueba mientras tanto
-  // url:string = "https://api.solodata.es/";
-  url:string = "https://lab.app.invertebrado.co/api/";
+  url:string = "https://api.solodata.es/";
+  // url:string = "https://lab.app.invertebrado.co/api/";
 
 
   constructor(private http:HttpClient) { }
   loginByEmail(form:LoginI):Observable<ResponseI>{
-    let direccion = this.url + "account/login";
+    let direccion = this.url + "auth";
     return this.http.post<ResponseI>(direccion,form)
   }
   getAllSubscribers(page:number):Observable<ListaSubcriptoresI[]>{
-    let direccion = this.url + "subscribers?page=" + page;
+    let direccion = this.url + "pacientes?page=" + page;
     return this.http.get<ListaSubcriptoresI[]>(direccion);
   }
   getSingleSubscribers(id:unknown):Observable<SubscriptorI>{
-    let direccion = this.url + "subscribers?id=" + id;
+    let direccion = this.url + "pacientes?id=" + id;
     return this.http.get<SubscriptorI>(direccion)
   }
-  // putSubscribers(form:SubscriptorI):Observable<ResponseI>{
-  //   let direccion = this.url + "pacientes";
-  //   return this.http.put<ResponseI>(direccion, form)
-  // }
-  // deleteSubscribers(from:SubscriptorI):Observable<ResponseI>{
-  //   let direccion = this.url + "pacientes";
-  //   let Options = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json',
-  //     }),
-  //     body:from
-  //   }
-  //   return this.http.delete<ResponseI>(direccion, Options)
-  // }
-  postSubscribers(form:SubscriptorI[]):Observable<ResponseI[]>{
-    let direccion = this.url + "subscribers/";
-    return this.http.post<ResponseI[]>(direccion,form)
+  putSubscribers(form:SubscriptorI):Observable<ResponseI>{
+    let direccion = this.url + "pacientes";
+    return this.http.put<ResponseI>(direccion, form)
+  }
+  deleteSubscribers(from:SubscriptorI):Observable<ResponseI>{
+    let direccion = this.url + "pacientes";
+    let Options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body:from
+    }
+    return this.http.delete<ResponseI>(direccion, Options)
+  }
+  postSubscribers(form:SubscriptorI):Observable<ResponseI>{
+    let direccion = this.url + "pacientes";
+    return this.http.post<ResponseI>(direccion,form)
   }
 
 }
